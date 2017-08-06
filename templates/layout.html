@@ -1,61 +1,51 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>{% block titre %}{% endblock %}</title>
-<link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
-<link href="{{url_for('static', filename='logo-nav.css')}}" rel="stylesheet">
-<link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
-<title>Calcul Numérique</title>
-<link rel="alternate" type="application/rss+xml" title="egrappler.com" href="feed/index.html">
-<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-        type="text/css">
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="stylesheet" href="static/css/prettify.css">
-</head>
-<body data-post="http://www.egrappler.com/free-product-documentation-template/" style="margin-top:45px">
-<nav>
-  <div class="container">
-    <div id="menu">
-      <ul class="toplinks">
-        <li></li>
-        <li> <a href="{{url_for('index')}}"><h4>Accueil</h4></a></li>
-        <li><a href="{{url_for('resol_lu')}}"><h4>Resolution par LU</h4></a></li>
-        <li><a href="{{url_for('fact_lu')}}"><h4>Factorisation LU</h4></a></li>
-        <li> <a href="{{url_for('fact_chol')}}"><h4>Factorisation Cholesky</h4></a></li>
-        <a style ="margin-left: 165px;"href="{{url_for('aide')}}" class="btn btn-info" role="button"><h4>Aide</h4></a>  
-    </div>
-    <a id="menu-toggle" href="#" class=" ">&#9776;</a> </div>
-</nav>
-<header>
-  <div class="container">
-    <h2 class="docs-header">Projet Calcul Numérique</h2>
-  </div>
-</header>
-<div class="container">
-        <div class="row">
-            <div class="col-lg-11">
-                {% block contenu %}{% endblock %}
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>{% block titre %}Calcul Numérique{% endblock %}</title>
+        <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/logo-nav.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/prettify.css')}}" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <div class="container">
+                <div id="menu">
+                    <ul class="toplinks">
+                        <li></li>
+                        <li><a href="{{url_for('index')}}"><h4>Accueil</h4></a></li>
+                        <li><a href="{{url_for('resolution_lu')}}"><h4>Resolution LU</h4></a></li>
+                        <li><a href="{{url_for('factorisation_lu')}}"><h4>Factorisation LU</h4></a></li>
+                        <li><a href="{{url_for('factorisation_cholesky')}}"><h4>Factorisation Cholesky</h4></a></li>
+                        <li><a href="{{url_for('aide')}}"><h4>Aide</h4></a></li>
+                    </ul>
+                </div>
+                <a id="menu-toggle" href="#" class="">&#9776;</a>
+            </div>
+        </nav>
+        <header>
+            <div class="container">
+                <h2 class="docs-header"><strong>Projet</strong> : Calcul Numérique</h2>
+            </div>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-11">
+                    {% block contenu %}{% endblock %}
+                </div>
             </div>
         </div>
-  </div>
+        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/prettify/prettify.js')}}"></script>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+        <script src="{{url_for('static', filename='js/layout.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.localscroll-1.2.7.js')}}" type="text/javascript"></script>
+        <script src="{{url_for('static', filename='js/jquery.scrollTo-1.4.3.1.js')}}" type="text/javascript"></script>
 
-<script src="js/jquery.min.js"></script>
-
-<script type="text/javascript" src="js/prettify/prettify.js"></script>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
-<script src="js/layout.js"></script>
- <script src="js/jquery.localscroll-1.2.7.js" type="text/javascript"></script>
- <script src="js/jquery.scrollTo-1.4.3.1.js" type="text/javascript"></script>
-   <script type="text/javascript" src="../../wp-content/themes/piha/js/top-bar-l1.js" ></script>
-  <script type="text/javascript" src="../../wp-content/themes/piha/js/bsa-ads-l1.js" ></script>
-  <!--Dynamically creates analytics markup-->
-  <?php include("http://www.egrappler.com/analytics.php");?>
-
-
-</body>
+    </body>
 </html>

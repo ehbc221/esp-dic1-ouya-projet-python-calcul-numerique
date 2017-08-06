@@ -1,20 +1,29 @@
 {% extends 'layout.html'%}
 
-{% block titre %} Accueil {% endblock %}
+{% block titre %}Accueil{% endblock %}
 
 {% block contenu %}
-<div class="jumbotron" style="background-color: #EDF7F2; color: #080004">
-<h2 style="color: #080004"> Accueil </h2>
+<div class="jumbotron">
 
-	<p>
-		Le but de ce projet est de concevoir une application permettant d'effectuer des operations telles que la résolution de systèmes linéraies par la methode LU, la factorisation par LU et la factorisation par Cholesky.
-		<br><br>
-		Développeurs:
-		<ul>
-			<h4><li>Oumar Niang</li></h4><br>
-                    <img style ="	max-width: 15%;height: auto; "src="{{url_for('static', filename='omzo2.png')}}" alt="logo"><br>	<br>
-			<h4><li>Ababacar Haidara</li></h4>
-		</ul>
-	</p>
+    <h3>Accueil</h3>
+
+    <p><strong>Professfeur</strong> : Dr. Samuel Ouya</p>
+    <p><strong>Matière</strong> : Calcul Numérique</p>
+    <p><strong>Classe</strong> : DIC 1 Informatique</p>
+    <p>
+        <strong>Binomes</strong> :
+        <ul>
+            <li>El Hadj Babacar Cissé</li>
+            <li>Amadou Moctar Diallo</li>
+        </ul>
+    </p>
+    <p>
+        <strong>Sujet</strong> : Concevoir une application permettant d'éffectuer des opérations telles que la résolution de systèmes linéaires par :
+        <ul>
+            <li>la méthode de résolution LU</li>
+            <li>la factorisation LU</li>
+            <li>la factorisation Cholesky.</li>
+        </ul>
+    </p>
 </div>
 {% endblock %}

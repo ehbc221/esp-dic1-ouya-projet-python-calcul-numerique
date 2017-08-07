@@ -279,11 +279,12 @@ def transvection(A, i, j, mu):
         A[i][k] += mu * A[j][k]
 
 
-def inverser_matrice(A):
+def methode_inversion_matrice(A):
     n = len(A)
     A0 = recopier_matrice(A)
     global I
     I = creer_matrice_identite(n)
+    i = 0
     for i in range(n - 1):  # triangularisation de la matrice
         index_pivot = pivot_partiel(A0, i)
         echanger_lignes(A0, i, index_pivot)

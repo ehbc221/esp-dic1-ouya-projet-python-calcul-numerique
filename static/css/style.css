@@ -454,3 +454,7 @@ h5 {
     width: 60px;
     margin-left: 10px;
 }
+
+p strong {
+    text-decoration: underline;
+}

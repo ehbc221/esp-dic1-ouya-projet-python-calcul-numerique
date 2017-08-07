@@ -1,0 +1,51 @@
+{% extends 'layout.html'%}
+
+{% block titre %}Resultats{% endblock %}
+
+{% block contenu %}
+<div class="jumbotron">
+
+    <h3>Factorisation Cholesky : Solution</h3>
+    <hr>
+
+    <!-- Si B=0, les conditions ne sont pas remplies -->
+    {%if B==0%}
+        <h5>Les conditions ne sont pas réunies</h5>
+        <a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Réessayez</button></a>
+
+    <!-- Sinon, on affiche B -->
+	{% else %}
+		{% for i in range(0, taille) %}
+			{% for j in range(0, taille) %}
+	            <input type="text" class="resultat" value="{{B[i][j]}}" disabled="disabled">
+			{% endfor %}
+	        <br>
+		{% endfor %}
+		<br>
+	    <p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <a href="#"><button class="btn btn-default" id="sms">M'envoyer le résultat par SMS</button></a>
+                </div>
+                <div class="col-xs-2 col-xs-offset-1">
+                    <a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Retour</button></a>
+                </div>
+            </div>
+        </p>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $('#sms').on('click', function () {
+            $('.jumbotron').append(
+                $('<form />', { class: 'form-inline', action: '/factorisation_cholesky/resultats', method: 'GET' }).append(
+                    $('<input />', { class: 'form-control', id: 'numero_telephone', name: 'numero_telephone', placeholder: '777777777', type: 'text' }),
+                    $('<input />', { type:'hidden', name: 'message', value: '{{ message }}' }),
+                    $('<input />', { class: 'btn btn-default btn-sm form-control', type: 'submit', value: 'Valider', required:'required' })
+            )
+            );
+        });
+    </script>
+{% endblock %}

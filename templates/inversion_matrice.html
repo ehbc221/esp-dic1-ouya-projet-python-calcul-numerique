@@ -1,11 +1,11 @@
 {% extends 'layout.html'%}
 
-{% block titre %}Resolution LU{% endblock %}
+{% block titre %} Inversion de Matrice {% endblock %}
 
 {% block contenu %}
 <div class="jumbotron">
 
-    <h3>Résolution d'un systeme lineaire par la méthode LU</h3>
+    <h3>Inversion Matrice</h3>
     <hr>
 
     <!-- Messages (Eventuels) -->
@@ -37,10 +37,10 @@
                 <input class="btn btn-default btn-sm form-control" type="submit" value="Valider">
             </form>
 
-        <!-- Sinon, si la taille de la matrice saisie est correcte, on lui affiche le formulaire de saisie de la matrice A et du vecteur b -->
-        {% else %}
+        <!-- Sinon, si la taille de la matrice saisie est correcte, on lui affiche le formulaire de saisie de la matrice A -->
+		{% else %}
             Taille = {{taille}}
-            <form action="/resolution_lu/resultats" method="POST">
+            <form action="/inversion_matrice/resultats" method="POST">
                 <input type="hidden" name="taille" value="{{taille}}">
                 <div class="row">
                     <div class="col-xs-{{taille//2+2}}">
@@ -52,12 +52,6 @@
                             <br>
                         {% endfor %}
                     </div>
-                    <div class="col-xs-offset-1 col-xs-2">
-                        <label>Vecteur :</label><br>
-                        {%for k in range(taille)%}
-                            <input type="number" name="b{{k}}" class="cellule"><br>
-                        {% endfor %}
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
@@ -65,7 +59,7 @@
                     </div>
                 </div>
 	        </form>
-        {% endif %}
-    {% endif %}
+		{% endif %}
+	{% endif %}
 </div>
 {% endblock %}

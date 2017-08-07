@@ -8,12 +8,21 @@
     <h3>Factorisation LU</h3>
     <hr>
 
+    <!-- Messages (Eventuels) -->
+    <p>
+        {% if flash is defined and status is defined %}
+            <div class="alert alert-{{ status }}" role="alert">
+                <strong>{{ flash }}</strong>
+            </div>
+        {% endif %}
+    </p>
+
     <!-- Si on vient d'arriver dans la page, on affiche le formulaire de saisie de la taille de la matrice -->
     {% if taille is undefined %}
-	<form action="" method="GET">
+	<form class="form-inline" action="" method="GET">
         <p><label for="taille">Donnez la taille de la matrice :</label></p>
-		<input type="number" name="taille" id="taille">
-		<input class="btn btn-default btn-sm" type="submit" value="Valider">
+		<input class="form-control" type="number" name="taille" id="taille">
+		<input class="btn btn-default btn-sm form-control" type="submit" value="Valider">
 	</form>
 
     <!-- Sinon, si la taille de la matrice saisie est incorrecte, on lui affiche un message d'erreur et on lui demande de ressaisir la taille -->
@@ -22,10 +31,10 @@
             <div class="alert alert-danger">
                 <strong>Erreur! </strong>Taille de la matrice incorrecte.
             </div>
-            <form action="" method="GET">
+            <form class="form-inline" action="" method="GET">
                 <p><label for="taille">Donnez la taille de la matrice :</label></p>
-                <input type="number" name="taille" id="taille">
-                <input class="btn btn-default btn-sm" type="submit" value="Valider">
+                <input class="form-control" type="number" name="taille" id="taille">
+                <input class="btn btn-default btn-sm form-control" type="submit" value="Valider">
             </form>
 
         <!-- Sinon, si la taille de la matrice saisie est correcte, on lui affiche le formulaire de saisie de la matrice A -->
@@ -45,8 +54,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-offset-5">
-                        <input class="btn btn-primary btn-lg active" type="submit" value="Valider">
+                    <div class="col-xs-4">
+                        <input class="btn btn-default btn-lg" type="submit" value="Valider">
                     </div>
                 </div>
             </form>

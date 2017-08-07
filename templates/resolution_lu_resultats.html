@@ -1,0 +1,49 @@
+{% extends 'layout.html'%}
+
+{% block titre %}Resultats{% endblock %}
+
+{% block contenu %}
+<div class="jumbotron">
+
+    <h3>Résolution d'un systeme lineaire par LU : Solution</h3>
+    <hr>
+
+    <!-- Si x=0, il n'y a pas de solution -->
+    {%if x == 0%}
+		<h5>Pas de solution!</h5>
+        <p><a href="{{url_for('resolution_lu')}}"><button class="btn btn-danger">Réessayez</button></a></p>
+
+
+    <!-- Sinon, on affiche le résultat -->
+    {% else %}
+		{% for k in range(0, taille) %}
+	        <input type="text" class="resultat" value="{{x[k]}}" disabled="disabled"><br>
+		{% endfor %}
+		<br>
+	    <p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <a href="#"><button class="btn btn-default" id="sms">M'envoyer le résultat par SMS</button></a>
+                </div>
+                <div class="col-xs-2 col-xs-offset-1">
+                    <a href="{{url_for('resolution_lu')}}"><button class="btn btn-danger">Retour</button></a>
+                </div>
+            </div>
+        </p>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $('#sms').on('click', function () {
+            $('.jumbotron').append(
+                $('<form />', { class: 'form-inline', action: '/resolution_lu/resultats', method: 'GET' }).append(
+                    $('<input />', { class: 'form-control', id: 'numero_telephone', name: 'numero_telephone', placeholder: '777777777', type: 'text' }),
+                    $('<input />', { type:'hidden', name: 'message', value: '{{ message }}' }),
+                    $('<input />', { class: 'btn btn-default btn-sm form-control', type: 'submit', value: 'Valider', required:'required' })
+            )
+            );
+        });
+    </script>
+{% endblock %}

@@ -3,21 +3,26 @@
 {% block titre %} Resultats{% endblock %}
 
 {% block contenu %}
-<h1> Factorisation Cholesky : Solution </h1>
-<div>
-	{%if B==0%}
-	<h2>Les conditions ne sont pas réunies</h2>
-	<br>
-	<a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Réessayez</button></a>
-	{%else%}
+<div class="jumbotron">
+
+    <h3>Factorisation Cholesky : Solution</h3>
+    <hr>
+
+    <!-- Si B=0, les conditions ne sont pas remplies -->
+    {%if B==0%}
+        <h5>Les conditions ne sont pas réunies</h5>
+        <a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Réessayez</button></a>
+
+    <!-- Sinon, on affiche B -->
+	{% else %}
 		{% for i in range(0, taille) %}
 			{% for j in range(0, taille) %}
-	<input type="text" style="width: 40px; margin-top: 11px; margin-right:150px;" value="{{B[i][j]}}" disabled="disabled">
+	            <input type="text" class="resultat" value="{{B[i][j]}}" disabled="disabled">
 			{% endfor %}
-	<br>
+	        <br>
 		{% endfor %}
 		<br>
-	<a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Retour</button></a>
-	{%endif%}
+		<p><a href="{{url_for('factorisation_cholesky')}}"><button class="btn btn-danger">Retour</button></a></p>
+	{% endif %}
 </div>
 {% endblock %}

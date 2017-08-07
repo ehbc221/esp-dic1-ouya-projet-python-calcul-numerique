@@ -32,7 +32,6 @@ def resolution_lu_results():
         b[k] = float(request.form['b'+str(k)])
     x = creer_liste(taille)
     x = methode_resolution_lu(A, b)
-    envoi_sms('778659165', 'hello world')
     return render_template('resolution_lu_resultat.html', taille=taille, x=x)
 
 
@@ -83,6 +82,12 @@ def factorisation_cholesky_results():
 @app.route('/aide')
 def aide():
     return render_template('aide.html')
+
+
+@app.route('/test')
+def test():
+    envoi_sms_babacar('778659165', 'KINGGOLDCHAINS')
+    return 'TEST'
 
 
 if __name__ == '__main__':

@@ -3,46 +3,54 @@
 {% block titre %} Factorisation Cholesky {% endblock %}
 
 {% block contenu %}
-<h4 style="text-align:center"> Factorisation Cholesky </h4>
-<div>
-	{% if taille is undefined %}
-	<h5>Donnez la taille de la matrice</h5>
+<div class="jumbotron">
+
+    <h3>Factorisation Cholesky</h3>
+    <hr>
+
+    <!-- Si on vient d'arriver dans la page, on affiche le formulaire de saisie de la taille de la matrice -->
+    {% if taille is undefined %}
 	<form action="" method="GET">
-		<input type="number" name="taille">
-		<input class="btn btn-primary" type="submit" value="Valider">
+        <p><label for="taille">Donnez la taille de la matrice :</label></p>
+		<input type="number" name="taille" id="taille">
+		<input class="btn btn-default btn-sm" type="submit" value="Valider">
 	</form>
+
+    <!-- Sinon, si la taille de la matrice saisie est incorrecte, on lui affiche un message d'erreur et on lui demande de ressaisir la taille -->
 	{% else %}
 		{% if taille <= 0 %}
-	<div class="alert alert-danger">
-		<strong>Erreur! </strong>Taille de la matrice incorrecte.
-	</div>
-	<h5>Donnez la taille de la matrice</h5>
-	<form action="" method="GET">
-		<input type="number" name="taille">
-		<input class="btn btn-primary" type="submit" value="Valider">
-	</form>
-		{%else%}
-	Taille = {{taille}}
-	<form action="/factorisation_cholesky/resultats" method="POST">
-		<input type="hidden" name="taille" value="{{taille}}">
-		<div class="row">
-			<div class="col-xs-{{taille//2+2}}">
-				<label>Matrice :</label><br>
-			{%for i in range(taille)%}
-				{%for j in range (taille)%}
-				<input type="number" name="A{{i}}_{{j}}" style="width: 40px; margin-bottom: 10px">
-				{%endfor%}
-				<br>
-			{%endfor%}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-offset-5">
-				<input class="btn btn-primary btn-lg active" type="submit" value="Valider">
-			</div>
-		</div>
-		{% endif %}
-	{%endif%}
-	</form>
+            <div class="alert alert-danger">
+                <strong>Erreur! </strong>Taille de la matrice incorrecte.
+            </div>
+            <form action="" method="GET">
+                <p><label for="taille">Donnez la taille de la matrice :</label></p>
+                <input type="number" name="taille" id="taille">
+                <input class="btn btn-default btn-sm" type="submit" value="Valider">
+            </form>
+
+        <!-- Sinon, si la taille de la matrice saisie est correcte, on lui affiche le formulaire de saisie de la matrice A -->
+        {% else %}
+            Taille = {{taille}}
+            <form action="/factorisation_cholesky/resultats" method="POST">
+                <input type="hidden" name="taille" value="{{taille}}">
+                <div class="row">
+                    <div class="col-xs-{{taille//2+2}}">
+                        <label>Matrice :</label><br>
+                        {% for i in range(taille) %}
+                            {% for j in range (taille) %}
+                            <input type="number" name="A{{i}}_{{j}}" class="cellule">
+                            {% endfor %}
+                            <br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-offset-5">
+                        <input class="btn btn-primary btn-lg active" type="submit" value="Valider">
+                    </div>
+                </div>
+	        </form>
+        {% endif %}
+	{% endif %}
 </div>
 {% endblock %}

@@ -31,7 +31,6 @@ def resolution_lu_results():
         # Sinon, on envoie le message au destinataire
         tel = str(tel)
         message = request.args.get('message')
-        return message
         envoi_sms_babacar(tel, message)
         flash = 'Message envoyé avec succès au ' + tel
         status = 'success'
@@ -49,8 +48,9 @@ def resolution_lu_results():
     x = creer_liste(taille)
     x = methode_resolution_lu(A, b)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
-    message = [z for y in str(x) for z in str(y)]
-    message = 'Résolution LU (taille=' + str(taille) + '): ' + ', '.join(map(str, message))
+    message = 'Résolution LU (x): '
+    for i in range(taille):
+        message += 'x[' + str(i) + ']=' + str(x[i]) + ', '
     return render_template('resolution_lu_resultats.html', taille=taille, x=x, message=message)
 
 
@@ -89,8 +89,10 @@ def factorisation_lu_results():
     L = creer_matrice_carree(taille)
     L = methode_factorisation_lu(A)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
-    message = [z for y in str(L) for z in y]
-    message = 'Factorisation LU (taille=' + str(taille) + '): ' + ', '.join(map(str, message))
+    message = 'Factorisation LU (L): '
+    for i in range(taille):
+        for j in range(taille):
+            message += 'L[' + str(i) + ',' + str(j) + ']=' + str(L[i][j]) + ', '
     return render_template('factorisation_lu_resultats.html', L=L, taille=taille, message=message)
 
 
@@ -129,8 +131,10 @@ def factorisation_cholesky_results():
     B = creer_matrice_carree(taille)
     B = methode_factorisation_cholesky(A)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
-    message = [z for y in str(B) for z in y]
-    message = 'Factorisation Cholesky (taille=' + str(taille) + '): ' + ', '.join(map(str, message))
+    message = 'Factorisation Cholesky (B): '
+    for i in range(taille):
+        for j in range(taille):
+            message += 'B[' + str(i) + ',' + str(j) + ']=' + str(B[i][j]) + ', '
     return render_template('factorisation_cholesky_resultats.html', taille=taille, B=B, message=message)
 
 
@@ -169,20 +173,16 @@ def inversion_matrice_resultats():
     I = creer_matrice_carree(taille)
     I = methode_inversion_matrice(A)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
-    message = [z for y in str(I) for z in y]
-    message = 'Inversion Matrice (taille=' + str(taille) + '): ' + ', '.join(map(str, message))
+    message = 'Inversion Matrice (I): '
+    for i in range(taille):
+        for j in range(taille):
+            message += 'I[' + str(i) + ',' + str(j) + ']=' + str(I[i][j]) + ', '
     return render_template('inversion_matrice_resultats.html', taille=taille, I=I, message=message)
 
 
 @app.route('/aide')
 def aide():
     return render_template('aide.html')
-
-
-@app.route('/test/')
-def test():
-    envoi_sms_babacar('778659165', 'KINGGOLDCHAINS')
-    return 'TEST'
 
 
 if __name__ == '__main__':

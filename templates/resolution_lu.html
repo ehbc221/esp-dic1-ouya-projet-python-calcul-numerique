@@ -21,7 +21,7 @@
     {% if taille is undefined %}
 	<form class="form-inline" action="" method="GET">
         <p><label for="taille">Donnez la taille de la matrice :</label></p>
-		<input class="form-control" type="number" name="taille" id="taille">
+		<input class="form-control" type="number" name="taille" id="taille" resuired>
 		<input class="btn btn-default btn-sm form-control" type="submit" value="Valider">
 	</form>
 
@@ -33,7 +33,7 @@
             </div>
             <form class="form-inline" action="" method="GET">
                 <p><label for="taille">Donnez la taille de la matrice :</label></p>
-                <input class="form-control" type="number" name="taille" id="taille">
+                <input class="form-control" type="number" name="taille" id="taille" resuired>
                 <input class="btn btn-default btn-sm form-control" type="submit" value="Valider">
             </form>
 
@@ -47,7 +47,7 @@
                         <label>Matrice :</label><br>
                         {% for i in range(taille) %}
                             {% for j in range (taille) %}
-                                <input type="number" name="A{{i}}_{{j}}" class="cellule">
+                                <input type="number" name="A{{i}}_{{j}}" class="cellule" resuired>
                             {% endfor %}
                             <br>
                         {% endfor %}
@@ -55,7 +55,7 @@
                     <div class="col-xs-offset-1 col-xs-2">
                         <label>Vecteur :</label><br>
                         {%for k in range(taille)%}
-                            <input type="number" name="b{{k}}" class="cellule"><br>
+                            <input type="number" name="b{{k}}" class="cellule" resuired><br>
                         {% endfor %}
                     </div>
                 </div>

@@ -15,9 +15,9 @@
 
     <!-- Sinon, on affiche B -->
 	{% else %}
-		{% for i in range(0, taille) %}
-			{% for j in range(0, taille) %}
-	            <input type="text" class="resultat" value="{{B[i][j]}}" disabled="disabled">
+		{% for i in range(taille) %}
+			{% for j in range(taille) %}
+	            <input type="text" class="resultat" value="{{B[i][j]}}" disabled>
 			{% endfor %}
 	        <br>
 		{% endfor %}
@@ -44,7 +44,7 @@
                     $('<input />', { class: 'form-control', id: 'numero_telephone', name: 'numero_telephone', placeholder: '777777777', type: 'text' }),
                     $('<input />', { type:'hidden', name: 'message', value: '{{ message }}' }),
                     $('<input />', { class: 'btn btn-default btn-sm form-control', type: 'submit', value: 'Valider', required:'required' })
-            )
+                )
             );
         });
     </script>

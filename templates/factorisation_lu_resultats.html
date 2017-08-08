@@ -8,31 +8,50 @@
     <h3>Factorisation LU : Solution</h3>
     <hr>
 
-    <!-- Si L=0, les conditions ne sont pas remplies -->
-    {%if L==0%}
-        <h5>Les conditions ne sont pas réunies</h5>
+    {% if ok == 1 %}
+        <h5>Impossible d'établir la factorisation</h5>
         <p><a href="{{url_for('factorisation_lu')}}"><button class="btn btn-danger">Réessayez</button></a></p>
+    {% else %}
+        <!-- Si L=0, les conditions ne sont pas remplies -->
+        {%if L==0%}
+            <h5>Les conditions ne sont pas réunies</h5>
+            <p><a href="{{url_for('factorisation_lu')}}"><button class="btn btn-danger">Réessayez</button></a></p>
 
-    <!-- Sinon, on affiche L -->
-	{% else %}
-		{% for i in range(0, taille) %}
-			{% for j in range(0, taille) %}
-	            <input type="text" class="resultat" value="{{L[i][j]}}" disabled="disabled">
-			{% endfor %}
-	        <br>
-		{% endfor %}
-		<br>
-	    <p>
+        <!-- Sinon, on affiche L -->
+        {% else %}
             <div class="row">
-                <div class="col-xs-3">
-                    <a href="#"><button class="btn btn-default" id="sms">M'envoyer le résultat par SMS</button></a>
+                <div class="col-md-6">
+                    <p><strong>L</strong></p>
+                    {% for i in range(taille) %}
+                        {% for j in range(taille) %}
+                            <input type="text" class="resultat" value="{{L[i][j]}}" disabled>
+                        {% endfor %}
+                        <br>
+                    {% endfor %}
                 </div>
-                <div class="col-xs-2 col-xs-offset-1">
-                    <a href="{{url_for('factorisation_lu')}}"><button class="btn btn-danger">Retour</button></a>
+                <div class="col-md-6">
+                    <p><strong>U</strong></p>
+                    {% for i in range(taille) %}
+                        {% for j in range(taille) %}
+                            <input type="text" class="resultat" value="{{U[i][j]}}" disabled>
+                        {% endfor %}
+                        <br>
+                    {% endfor %}
                 </div>
             </div>
-        </p>
-	{% endif %}
+            <br>
+            <p>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <a href="#"><button class="btn btn-default" id="sms">M'envoyer le résultat par SMS</button></a>
+                    </div>
+                    <div class="col-xs-2 col-xs-offset-1">
+                        <a href="{{url_for('factorisation_lu')}}"><button class="btn btn-danger">Retour</button></a>
+                    </div>
+                </div>
+            </p>
+        {% endif %}
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -44,7 +63,7 @@
                     $('<input />', { class: 'form-control', id: 'numero_telephone', name: 'numero_telephone', placeholder: '777777777', type: 'text' }),
                     $('<input />', { type:'hidden', name: 'message', value: '{{ message }}' }),
                     $('<input />', { class: 'btn btn-default btn-sm form-control', type: 'submit', value: 'Valider', required:'required' })
-            )
+                )
             );
         });
     </script>

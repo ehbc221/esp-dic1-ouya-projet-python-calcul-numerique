@@ -1,6 +1,5 @@
 from math import *
-import requests
-import json
+import requests, json
 
 
 ######################
@@ -127,7 +126,7 @@ def remontee_lu(A, b):
 
 
 def methode_resolution_lu(A, b):
-    L = methode_factorisation_lu(A)
+    L = methode_factorisation_lu_2(A)
     if L != 0:
         y = descente_lu(L, b)
         x = remontee_lu(A, y)
@@ -156,7 +155,7 @@ def elimination_lu(k, A):
     return A
 
 
-def methode_factorisation_lu(A):
+def methode_factorisation_lu_2(A):
     global n
     n = len(A)
     k = 0
@@ -178,8 +177,8 @@ def methode_factorisation_lu(A):
         return 0
 
 
-"""
-def factorisation_lu(A,L,U):
+def methode_factorisation_lu(A,L,U):
+    n = len(A)
     ok = 0
     for i in range(n):
         U[0][i] = A[0][i]
@@ -202,7 +201,6 @@ def factorisation_lu(A,L,U):
     for i in range(n):
         L[i][i] = 1
     return L, U, ok
-"""
 
 
 ##########################
@@ -254,7 +252,7 @@ def echanger_lignes(A, i, j):
 
 def pivot_partiel(A, j0):
     # Recherche de pivots partiels en commencant au rang j0 de la matrice A
-    # La fonction renvoi l index du pivot suivant
+    # La fonction renvoi l'index du pivot suivant
     pivot = A[j0][j0]
     index = j0
     for k in range(j0 + 1, len(A)):

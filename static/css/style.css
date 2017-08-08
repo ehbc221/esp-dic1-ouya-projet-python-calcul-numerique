@@ -178,9 +178,12 @@ footer p {
 /* Navigation Styles */
 nav {
     background: #212121;
-    padding: 10px 0;
     margin-top: 0px;
     min-height: 60px;
+}
+
+nav ul {
+	background: #5D4037;
 }
 
 nav ul,
@@ -191,13 +194,11 @@ nav li {
 }
 
 nav a {
-    padding: 0 1em;
     color: #FFFFFF;
     font-size: .9em;
-    height: 60px;
-    line-height: 60px;
+    padding: 10px 10px 10px 10px;
     display: block;
-	background:#212121;
+	background: #5D4037;
 }
 
 nav h1 a {
@@ -207,7 +208,7 @@ nav h1 a {
 }
 
 nav a:hover {
-    background: #5D4037;
+    background: #795548;
     color: #FFFFFF;
     text-decoration: none;
 }

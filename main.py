@@ -20,6 +20,7 @@ def resolution_lu():
 
 @app.route('/resolution_lu/resultats', methods=['GET', 'POST'])
 def resolution_lu_results():
+    # Si on a reçu un numéro de téléphone, c'est qu'on est dans la partie envoi_sms
     if request.method == 'GET' and request.args.get('numero_telephone') is not None:
         tel = request.args.get('numero_telephone')
         try:  # On essaie de convertir le numero pour voir s'il est au bon format
@@ -35,22 +36,27 @@ def resolution_lu_results():
         flash = 'Message envoyé avec succès au ' + tel
         status = 'success'
         return render_template('resolution_lu.html', flash=flash, status=status)
+    # Pour tout autre accès avec GET, on envoie le formulaire de saisie de la taille de la matrice
     if request.method == 'GET':
         return redirect(url_for('resolution_lu'))
     taille = int(request.form['taille'])
     A = creer_matrice_carree(taille)
     b = creer_liste(taille)
-    for i in range(0, taille):
-        for j in range(0, taille):
+    for i in range(taille):
+        for j in range(taille):
             A[i][j] = float(request.form['A'+str(i)+'_'+str(j)])
-    for k in range(0, taille):
+    for k in range(taille):
         b[k] = float(request.form['b'+str(k)])
     x = creer_liste(taille)
     x = methode_resolution_lu(A, b)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
     message = 'Résolution LU (x): '
-    for i in range(taille):
-        message += 'x[' + str(i) + ']=' + str(x[i]) + ', '
+    try:
+        for i in range(taille):
+            message += 'x[' + str(i) + ']=' + str(x[i]) + ', '
+    except TypeError:
+        message = "impossible de résoudre le système"
+        return render_template('resolution_lu_resultats.html', taille=taille, x=0, message=message)
     return render_template('resolution_lu_resultats.html', taille=taille, x=x, message=message)
 
 
@@ -64,6 +70,7 @@ def factorisation_lu():
 
 @app.route('/factorisation_lu/resultats', methods=['GET', 'POST'])
 def factorisation_lu_results():
+    # Si on a reçu un numéro de téléphone, c'est qu'on est dans la partie envoi_sms
     if request.method == 'GET' and request.args.get('numero_telephone') is not None:
         tel = request.args.get('numero_telephone')
         try:  # On essaie de convertir le numero pour voir s'il est au bon format
@@ -79,21 +86,27 @@ def factorisation_lu_results():
         flash = 'Message envoyé avec succès au ' + tel
         status = 'success'
         return render_template('factorisation_lu.html', flash=flash, status=status)
+    # Pour tout autre accès avec GET, on envoie le formulaire de saisie de la taille de la matrice
     if request.method == 'GET':
         return redirect(url_for('factorisation_lu'))
     taille = int(request.form['taille'])
     A = creer_matrice_carree(taille)
-    for i in range(0, taille):
-        for j in range(0, taille):
+    for i in range(taille):
+        for j in range(taille):
             A[i][j] = float(request.form['A'+str(i)+'_'+str(j)])
     L = creer_matrice_carree(taille)
-    L = methode_factorisation_lu(A)
+    U = creer_matrice_carree(taille)
+    L, U, ok = methode_factorisation_lu(A, L, U)
     # On converti d'bord le resultat en chaine de caractère(au cas où on devrai l'envoyer par sms)
     message = 'Factorisation LU (L): '
     for i in range(taille):
         for j in range(taille):
             message += 'L[' + str(i) + ',' + str(j) + ']=' + str(L[i][j]) + ', '
-    return render_template('factorisation_lu_resultats.html', L=L, taille=taille, message=message)
+    message += 'et (U): '
+    for i in range(taille):
+        for j in range(taille):
+            message += 'U[' + str(i) + ',' + str(j) + ']=' + str(U[i][j]) + ', '
+    return render_template('factorisation_lu_resultats.html', L=L, U=U, taille=taille, message=message, ok=ok)
 
 
 @app.route('/factorisation_cholesky')
@@ -106,6 +119,7 @@ def factorisation_cholesky():
 
 @app.route('/factorisation_cholesky/resultats', methods=['GET', 'POST'])
 def factorisation_cholesky_results():
+    # Si on a reçu un numéro de téléphone, c'est qu'on est dans la partie envoi_sms
     if request.method == 'GET' and request.args.get('numero_telephone') is not None:
         tel = request.args.get('numero_telephone')
         try:  # On essaie de convertir le numero pour voir s'il est au bon format
@@ -121,12 +135,13 @@ def factorisation_cholesky_results():
         flash = 'Message envoyé avec succès au ' + tel
         status = 'success'
         return render_template('factorisation_cholesky.html', flash=flash, status=status)
+    # Pour tout autre accès avec GET, on envoie le formulaire de saisie de la taille de la matrice
     if request.method == 'GET':
         return redirect(url_for('factorisation_cholesky'))
     taille = int(request.form['taille'])
     A = creer_matrice_carree(taille)
-    for i in range(0, taille):
-        for j in range(0, taille):
+    for i in range(taille):
+        for j in range(taille):
             A[i][j] = float(request.form['A'+str(i)+'_'+str(j)])
     B = creer_matrice_carree(taille)
     B = methode_factorisation_cholesky(A)
@@ -148,6 +163,7 @@ def inversion_matrice():
 
 @app.route('/inversion_matrice/resultats', methods=['GET', 'POST'])
 def inversion_matrice_resultats():
+    # Si on a reçu un numéro de téléphone, c'est qu'on est dans la partie envoi_sms
     if request.method == 'GET' and request.args.get('numero_telephone') is not None:
         tel = request.args.get('numero_telephone')
         try:  # On essaie de convertir le numero pour voir s'il est au bon format
@@ -163,12 +179,13 @@ def inversion_matrice_resultats():
         flash = 'Message envoyé avec succès au ' + tel
         status = 'success'
         return render_template('inversion_matrice.html', flash=flash, status=status)
+    # Pour tout autre accès avec GET, on envoie le formulaire de saisie de la taille de la matrice
     if request.method == 'GET':
         return redirect(url_for('inversion_matrice'))
     taille = int(request.form['taille'])
     A = creer_matrice_carree(taille)
-    for i in range(0, taille):
-        for j in range(0, taille):
+    for i in range(taille):
+        for j in range(taille):
             A[i][j] = float(request.form['A'+str(i)+'_'+str(j)])
     I = creer_matrice_carree(taille)
     I = methode_inversion_matrice(A)

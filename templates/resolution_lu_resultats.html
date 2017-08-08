@@ -9,15 +9,15 @@
     <hr>
 
     <!-- Si x=0, il n'y a pas de solution -->
-    {%if x == 0%}
+    {% if x == 0 %}
 		<h5>Pas de solution!</h5>
         <p><a href="{{url_for('resolution_lu')}}"><button class="btn btn-danger">Réessayez</button></a></p>
 
 
     <!-- Sinon, on affiche le résultat -->
     {% else %}
-		{% for k in range(0, taille) %}
-	        <input type="text" class="resultat" value="{{x[k]}}" disabled="disabled"><br>
+		{% for k in range(taille) %}
+	        <input type="text" class="resultat" value="{{x[k]}}" disabled><br>
 		{% endfor %}
 		<br>
 	    <p>
@@ -42,7 +42,7 @@
                     $('<input />', { class: 'form-control', id: 'numero_telephone', name: 'numero_telephone', placeholder: '777777777', type: 'text' }),
                     $('<input />', { type:'hidden', name: 'message', value: '{{ message }}' }),
                     $('<input />', { class: 'btn btn-default btn-sm form-control', type: 'submit', value: 'Valider', required:'required' })
-            )
+                )
             );
         });
     </script>
